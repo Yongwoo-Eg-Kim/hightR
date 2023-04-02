@@ -9,13 +9,13 @@ hight_dec(C, IV, MK, mode, output = "int")
 \arguments{
 \item{C}{Encrypted plaintext by HIGHT.}
 
-\item{IV}{Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation.}
+\item{IV}{Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation. Its length must be equal to 8, which is a unit of cryptographic block, and the value range must also have a value from 0 to 255.}
 
 \item{MK}{Master Key. This is used to encrypt other keys that are used to encrypt and decrypt data. This should be typically kept secret and is only accessible to authorized users who need to use it for encryption and decryption operations.  It should have a length of 16 and must have a value from 0 to 255.}
 
-\item{mode}{Support 'ecb'(Electric CodeBook mode),'cfb'(Cipher FeedBack mode),'cbc'(Cipher Block Chaining mode),'ofb'(Output FeedBack mode) mode.}
+\item{mode}{Please select one from 'ecb'(Electric CodeBook mode),'cfb'(Cipher FeedBack mode),'cbc'(Cipher Block Chaining mode),'ofb'(Output FeedBack mode).}
 
-\item{output}{Support 'hex'(e.g. '0x66') or 'int'(e.g. 102) for output format.}
+\item{output}{Support 'hex'(e.g. '0x66') string or 'int'(e.g. 102) for output format.}
 }
 \description{
 HIGHT (HIGh security and light weigHT) is a symmetric key block cipher algorithm designed for use in resource-constrained environments such as embedded systems and wireless sensor networks.
