@@ -9,4 +9,5 @@ Encoding: UTF-8
 BugReports: https://github.com/Yongwoo-Eg-Kim/hightR/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Author:  Yongwoo Kim [aut, cre]
 Maintainer: Yongwoo Kim <yw_kim@outlook.com>
