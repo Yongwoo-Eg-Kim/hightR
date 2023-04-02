@@ -1,5 +1,9 @@
-# Please refer to the original paper: "Hong, D., Sung, J., Hong, S., Lim, J., Lee, S., Koo, B. S., ... & Chee, S. (2006). HIGHT: A new block cipher suitable for low-resource device. In Cryptographic Hardware and Embedded Systems-CHES 2006: 8th International Workshop, Yokohama, Japan, October 10-13, 2006. Proceedings 8 (pp. 46-59). Springer Berlin Heidelberg."
+# Please refer to the original paper for details: "Hong, D., Sung, J., Hong, S., Lim, J., Lee, S., Koo, B. S., ... & Chee, S. (2006). HIGHT: A new block cipher suitable for low-resource device. In Cryptographic Hardware and Embedded Systems-CHES 2006: 8th International Workshop, Yokohama, Japan, October 10-13, 2006. Proceedings 8 (pp. 46-59). Springer Berlin Heidelberg."
 # Original Paper url: https://www.iacr.org/archive/ches2006/04/04.pdf
+
+# OTHER REFERENCES
+# https://seed.kisa.or.kr/kisa/algorithm/EgovHightInfo.do
+# https://seed.kisa.or.kr/kisa/Board/18/detailView.do
 
 list_to_byte <- function(lst) {
   byte =0
@@ -362,6 +366,5 @@ ofb_hight_decryption <- function(C, IV, MK){
 # hight_enc(P,IV,MK,mode = 'ofb', output='int')
 # hight_enc(P,IV,MK,mode = 'cbc', output='hex')
 # hight_dec (hight_enc(P,IV,MK,mode = 'cbc', output='int') , IV, MK , 'cbc','int')
-
 
 

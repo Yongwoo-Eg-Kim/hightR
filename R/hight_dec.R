@@ -17,10 +17,10 @@
 #' @name hight_dec
 #'
 #' @param C Encrypted plaintext by HIGHT.
-#' @param IV Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation.
+#' @param IV Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation. Its length must be equal to 8, which is a unit of cryptographic block, and the value range must also have a value from 0 to 255.
 #' @param MK Master Key. This is used to encrypt other keys that are used to encrypt and decrypt data. This should be typically kept secret and is only accessible to authorized users who need to use it for encryption and decryption operations.  It should have a length of 16 and must have a value from 0 to 255.
-#' @param mode Support 'ecb'(Electric CodeBook mode),'cfb'(Cipher FeedBack mode),'cbc'(Cipher Block Chaining mode),'ofb'(Output FeedBack mode) mode.
-#' @param output Support 'hex'(e.g. '0x66') or 'int'(e.g. 102) for output format.
+#' @param mode Please select one from 'ecb'(Electric CodeBook mode),'cfb'(Cipher FeedBack mode),'cbc'(Cipher Block Chaining mode),'ofb'(Output FeedBack mode).
+#' @param output Support 'hex'(e.g. '0x66') string or 'int'(e.g. 102) for output format.
 #' @examples
 #' MK = c(0x88, 0xE3, 0x4F, 0x8F, 0x08, 0x17, 0x79, 0xF1,
 #'        0xE9, 0xF3, 0x94, 0x37, 0x0A, 0xD4, 0x05, 0x89)
@@ -33,6 +33,8 @@
 #' @export
 
 hight_dec <- function(C, IV, MK, mode, output='int' ){
+  if( length(IV)  != 8  ) { stop('Please check the length of Initialization Vector(IV)') }
+  if( !all( (IV >=0) & (IV <=255)) ) { stop('Please check the range of Initialization Vector(IV)') }
   if( length(C)  %% 8 != 0  ) { stop('Please check the length of Password') }
   if( !all( (C >=0) & (C <=255)) ) { stop('Please check the range of Password') }
   if (length(MK) != 16) { stop('Please check the length of MasterKey(MK)')}
