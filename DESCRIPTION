@@ -1,0 +1,11 @@
+Package: hightR
+Title: HIGHT (HIGh security and light weigHT)
+Version: 0.1.0
+Authors@R: 
+    person("Yongwoo", "Kim", email="yw_kim@outlook.com", role = c("aut", "cre") )
+Description: Encryption and decryption using HIGHT algorithm.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Maintainer: Yongwoo Kim <yw_kim@outlook.com>
