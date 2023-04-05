@@ -5,6 +5,8 @@
 # https://seed.kisa.or.kr/kisa/algorithm/EgovHightInfo.do
 # https://seed.kisa.or.kr/kisa/Board/18/detailView.do
 
+utils::globalVariables(c("P"))
+
 list_to_byte <- function(lst) {
   byte =0
   for (bit in lst){
