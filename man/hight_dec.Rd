@@ -17,9 +17,12 @@ hight_dec(C, IV, MK, mode, output = "int")
 
 \item{output}{Support 'hex'(e.g. '0x66') string or 'int'(e.g. 102) for output format.}
 }
+\value{
+Returns a numeric vector decrypted by the HIGHT algorithm.
+}
 \description{
 HIGHT (HIGh security and light weigHT) is a symmetric key block cipher algorithm designed for use in resource-constrained environments such as embedded systems and wireless sensor networks.
-Outputs 64-bit ciphertext from 128-bit master key and 64-bit plaintext.
+Outputs 64-bit ciphertext from 128-bit master key and 64-bit plaintext. This process can be repeated multiple times.
 }
 \examples{
 MK = c(0x88, 0xE3, 0x4F, 0x8F, 0x08, 0x17, 0x79, 0xF1,
