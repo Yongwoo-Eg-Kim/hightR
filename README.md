@@ -1,3 +1,7 @@
+<!-- badges: start -->
+[![CRAN](https://www.r-pkg.org/badges/version/hightR)](https://cran.r-project.org/package=hightR)
+  <!-- badges: end -->
+
 hightR
 
 
