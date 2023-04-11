@@ -21,5 +21,7 @@ install.packages("hightR")
 
 
 ## Please visit the following pages for more information.
+
 https://rdrr.io/cran/hightR/
+
 https://cran.r-project.org/package=hightR
