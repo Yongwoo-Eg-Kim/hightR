@@ -10,6 +10,13 @@ HIGHT(HIGh security and light weigHT) algorithm is a block cipher encryption alg
 
 
 
+## Install
+
+Install the stable version from CRAN.
+
+```r
+install.packages("hightR")
+```
 
 
 
