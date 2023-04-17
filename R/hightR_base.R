@@ -5,7 +5,7 @@
 # https://seed.kisa.or.kr/kisa/algorithm/EgovHightInfo.do
 # https://seed.kisa.or.kr/kisa/Board/18/detailView.do
 
-utils::globalVariables(c("P"))
+utils::globalVariables(c("P","IV"))
 
 list_to_byte <- function(lst) {
   byte =0

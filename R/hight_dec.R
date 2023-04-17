@@ -17,43 +17,47 @@
 #' @name hight_dec
 #'
 #' @param C Encrypted plaintext by HIGHT.
-#' @param IV Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation. Its length must be equal to 8, which is a unit of cryptographic block, and the value range must also have a value from 0 to 255.
 #' @param MK Master Key. This is used to encrypt other keys that are used to encrypt and decrypt data. This should be typically kept secret and is only accessible to authorized users who need to use it for encryption and decryption operations. It should have a length of 16 and must have a value from 0 to 255.
 #' @param mode Please select one from 'ecb'(Electric CodeBook mode),'cfb'(Cipher FeedBack mode),'cbc'(Cipher Block Chaining mode),'ofb'(Output FeedBack mode).
+#' @param IV Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation. Its length must be equal to 8, which is a unit of cryptographic block, and the value range must also have a value from 0 to 255. This parameter will be ignored in ECB mode.
 #' @param output Support 'hex'(e.g. '0x66') string or 'int'(e.g. 102) for output format.
 #'
 #' @return  Returns a numeric vector decrypted by the HIGHT algorithm.
 #'
 #' @examples
+#' # Encryption and Decryption (CBC mode)
 #' MK = c(0x88, 0xE3, 0x4F, 0x8F, 0x08, 0x17, 0x79, 0xF1,
 #'        0xE9, 0xF3, 0x94, 0x37, 0x0A, 0xD4, 0x05, 0x89)
 #' IV = c(0x26, 0x8D, 0x66, 0xA7, 0x35, 0xA8, 0x1A, 0x81)
 #' P = c(0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07)
-#' C = hight_enc(P,IV,MK,mode = 'cbc', output='int')
-#' hight_dec (C, IV, MK , mode = 'cbc', output = 'int')
+#' C = hight_enc(P,MK,mode = 'CBC', IV, output='int')
+#' hight_dec (C,MK , mode = 'CBC', IV, output = 'int')
+#'
+#' # Check decrypted text is same with the Plaintext
+#' hight_dec (C, MK , mode = 'ecb', IV, output = 'int')==P
 #'
 #' @rdname hight_dec
 #' @export
 
-hight_dec <- function(C, IV, MK, mode, output='int' ){
-  if( length(IV)  != 8  ) { stop(paste('Please check the length of IV(Initialization Vector) parameter', IV,sep=': ')); }
-  if( !all( (IV >=0) & (IV <=255)) ) { stop(paste('Please check the range of IV(Initialization Vector) parameter', IV,sep=': ')); }
+hight_dec <- function(C, MK, mode, IV=NULL, output='int' ){
+  if( length(IV)  != 8  & (mode!='ecb') & (mode!='ECB') ) { stop(paste('Please check the length of IV(Initialization Vector) parameter', IV,sep=': ')); }
+  if( !all( (IV >=0) & (IV <=255)) & (mode!='ecb') & (mode!='ECB') ) { stop(paste('Please check the range of IV(Initialization Vector) parameter', IV,sep=': ')); }
   if( length(C)  %% 8 != 0  ) { stop( paste('Please check the length of C(Encrypted plaintext) parameter', C,sep=': '));}
   if( !all( (C >=0) & (C <=255)) ) { stop(paste('Please check the range of C(Encrypted plaintext) parameter', C,sep=': ')); }
   if (length(MK) != 16) {stop( paste('Please check the range of MK(MasterKey) parameter', MK,sep=': ')); }
   if( !all( (MK >=0) & (MK <=255)) ) { stop(paste('Please check the range of MK(MasterKey) parameter', MK,sep=': '));  }
   C = as.integer(C)
 
-  if (mode=='cbc') {
+  if (mode %in%  c('cbc','CBC')) {
     result = cbc_hight_decryption(C,IV,MK)
   }
-  else if (mode =='cfb') {
+  else if (mode  %in% c('cfb','CFB')) {
     result = cfb_hight_decryption(C, IV, MK)
   }
-  else if (mode =='ecb' ) {
+  else if (mode  %in% c('ecb','ECB') ) {
     result = ecb_hight_decryption(C, MK)
   }
-  else if (mode =='ofb' ) {
+  else if (mode  %in%  c('ofb','OFB') ) {
     result = ofb_hight_decryption(C, IV, MK)
   }
   else {
