@@ -4,16 +4,16 @@
 \alias{hight_dec}
 \title{Perform decryption using HIGHT.}
 \usage{
-hight_dec(C, IV, MK, mode, output = "int")
+hight_dec(C, MK, mode, IV = NULL, output = "int")
 }
 \arguments{
 \item{C}{Encrypted plaintext by HIGHT.}
 
-\item{IV}{Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation. Its length must be equal to 8, which is a unit of cryptographic block, and the value range must also have a value from 0 to 255.}
-
 \item{MK}{Master Key. This is used to encrypt other keys that are used to encrypt and decrypt data. This should be typically kept secret and is only accessible to authorized users who need to use it for encryption and decryption operations. It should have a length of 16 and must have a value from 0 to 255.}
 
 \item{mode}{Please select one from 'ecb'(Electric CodeBook mode),'cfb'(Cipher FeedBack mode),'cbc'(Cipher Block Chaining mode),'ofb'(Output FeedBack mode).}
+
+\item{IV}{Initialization Vector. The IV is usually generated randomly and is different for each encryption operation. It is combined with the encryption key to produce a unique key for each encryption operation. Its length must be equal to 8, which is a unit of cryptographic block, and the value range must also have a value from 0 to 255. This parameter will be ignored in ECB mode.}
 
 \item{output}{Support 'hex'(e.g. '0x66') string or 'int'(e.g. 102) for output format.}
 }
@@ -25,12 +25,16 @@ HIGHT (HIGh security and light weigHT) is a symmetric key block cipher algorithm
 Outputs 64-bit ciphertext from 128-bit master key and 64-bit plaintext. This process can be repeated multiple times.
 }
 \examples{
+# Encryption and Decryption (CBC mode)
 MK = c(0x88, 0xE3, 0x4F, 0x8F, 0x08, 0x17, 0x79, 0xF1,
        0xE9, 0xF3, 0x94, 0x37, 0x0A, 0xD4, 0x05, 0x89)
 IV = c(0x26, 0x8D, 0x66, 0xA7, 0x35, 0xA8, 0x1A, 0x81)
 P = c(0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07)
-C = hight_enc(P,IV,MK,mode = 'cbc', output='int')
-hight_dec (C, IV, MK , mode = 'cbc', output = 'int')
+C = hight_enc(P,MK,mode = 'CBC', IV, output='int')
+hight_dec (C,MK , mode = 'CBC', IV, output = 'int')
+
+# Check decrypted text is same with the Plaintext
+hight_dec (C, MK , mode = 'ecb', IV, output = 'int')==P
 
 }
 \references{
