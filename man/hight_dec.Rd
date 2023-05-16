@@ -34,7 +34,7 @@ C = hight_enc(P,MK,mode = 'CBC', IV, output='int')
 hight_dec (C,MK , mode = 'CBC', IV, output = 'int')
 
 # Check decrypted text is same with the Plaintext
-hight_dec (C, MK , mode = 'ecb', IV, output = 'int')==P
+hight_dec (C, MK , mode = 'CBC', IV, output = 'int')==P
 
 }
 \references{
